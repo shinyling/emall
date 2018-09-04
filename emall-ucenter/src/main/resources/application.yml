@@ -1,0 +1,40 @@
+flyway:
+  location: classpath:/db
+spring:
+  application:
+    name: emall-ucenter
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url:  jdbc:mysql://10.1.5.92:3306/mall?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    initialSize: 5
+    minIdle: 5
+    maxActive: 2000
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    logSlowSql: true
+# MyBatis 配置
+# mybatis的mapper.xml文件的路径
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+# mybatis的model所在的包
+  type-aliases-package: com.shiny.emall.common.ucenter.entity
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9527/eureka/
+server:
+  port: 9526
+logging:
+  config: classpath:log4j2.xml
