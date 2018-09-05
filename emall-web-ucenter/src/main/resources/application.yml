@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: emall-web-ucenter
+server:
+  port: 9528
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9527/eureka/
+feign:
+  hystrix:
+    enable: true
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+logging:
+  config: classpath:log4j2.xml

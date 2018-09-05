@@ -1,0 +1,5 @@
+com\shiny\emall\ucenter\api\impl\UserRemoteApiImpl.class
+com\shiny\emall\ucenter\UcenterApplication.class
+com\shiny\emall\ucenter\dao\UserMapper.class
+com\shiny\emall\ucenter\config\DruidConfig.class
+com\shiny\emall\ucenter\dao\FlywaySchemaHistoryMapper.class

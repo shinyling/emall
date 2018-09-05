@@ -18,8 +18,11 @@
     </parent>
 
     <modules>
-        <module>emall-ucenter</module>
+        <module>emall-common</module>
+        <module>emall-service-ucenter</module>
         <module>emall-eureka</module>
+        <module>emall-web-ucenter</module>
+        <module>emall-service-ucenter-api</module>
     </modules>
 
     <properties>
@@ -40,12 +43,4 @@
         </dependencies>
     </dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
