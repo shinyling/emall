@@ -38,3 +38,6 @@ server:
   port: 9526
 logging:
   config: classpath:log4j2.xml
+ribbon:
+  eureka:
+    enabled: true
