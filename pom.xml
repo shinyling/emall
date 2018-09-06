@@ -24,6 +24,7 @@
         <module>emall-web-ucenter</module>
         <module>emall-service-ucenter-api</module>
         <module>emall-api-gateway</module>
+        <module>emall-hystrix-turbine</module>
     </modules>
 
     <properties>
