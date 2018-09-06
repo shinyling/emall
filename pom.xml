@@ -23,6 +23,7 @@
         <module>emall-eureka</module>
         <module>emall-web-ucenter</module>
         <module>emall-service-ucenter-api</module>
+        <module>emall-api-gateway</module>
     </modules>
 
     <properties>

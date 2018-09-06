@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: emall-api-gateway
+server:
+  port: 8888
+eureka:
+  client:
+    serviceUrl:
+     defaultZone: http://localhost:9527/eureka
+logging:
+  config: classpath:log4j2.xml
+zuul:
+  ignored-services: emall-service-ucenter
+  routes:
+    ucenter:
+      path: /ucenter/**
+      service-id: emall-web-ucenter
