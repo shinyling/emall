@@ -1,10 +1,12 @@
 package com.shiny.emall.ucenter.api.impl;
 
-import com.shiny.emall.common.ucenter.entity.User;
+import com.shiny.emall.common.ucenter.entity.UcUser;
 import com.shiny.emall.common.utils.IdUtils;
+import com.shiny.emall.common.vo.JsonResult;
 import com.shiny.emall.ucenter.api.UserRemoteApi;
-import com.shiny.emall.ucenter.dao.UserMapper;
+import com.shiny.emall.ucenter.dao.UcUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,13 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserRemoteApiImpl implements UserRemoteApi {
 
     @Autowired
-    private UserMapper userMapper;
+    private UcUserMapper userMapper;
 
     @Override
-    public User addUser(@RequestBody User user) {
+    public JsonResult addUser(@RequestBody UcUser user) {
         String id=IdUtils.id();
         user.setId(id);
         userMapper.insert(user);
-        return user;
+        return new JsonResult(user);
     }
+
+    @Override
+    public JsonResult findByUsername(@PathVariable String username) {
+        UcUser user=userMapper.selectByUsername(username);
+        return new JsonResult(user);
+    }
+
 }

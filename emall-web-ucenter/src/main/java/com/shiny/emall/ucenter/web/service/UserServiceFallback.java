@@ -1,6 +1,7 @@
 package com.shiny.emall.ucenter.web.service;
 
-import com.shiny.emall.common.ucenter.entity.User;
+import com.shiny.emall.common.ucenter.entity.UcUser;
+import com.shiny.emall.common.vo.JsonResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,8 +11,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserServiceFallback implements UserService {
     @Override
-    public User addUser(User user) {
-        System.out.println("服务降级");
-        return null;
+    public JsonResult addUser(UcUser user) {
+        return JsonResult.failure("服务降级");
+    }
+
+    @Override
+    public JsonResult findByUsername(String username) {
+        return JsonResult.failure("服务降级");
     }
 }

@@ -1,6 +1,7 @@
 package com.shiny.emall.ucenter.api;
 
-import com.shiny.emall.common.ucenter.entity.User;
+import com.shiny.emall.common.ucenter.entity.UcUser;
+import com.shiny.emall.common.vo.JsonResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 public interface UserRemoteApi {
 
-    @RequestMapping(value = "/add/user",method = RequestMethod.POST)
-    User addUser(User user);
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    JsonResult addUser(UcUser user);
+
+    @RequestMapping(value = "/findByUsername",method = RequestMethod.GET)
+    JsonResult findByUsername(String username);
 }

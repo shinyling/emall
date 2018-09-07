@@ -1,16 +1,14 @@
-DROP TABLE IF EXISTS `user` ;
+DROP TABLE IF EXISTS `uc_user_role` ;
+DROP TABLE IF EXISTS `uc_role_menu` ;
 
-CREATE TABLE `user` (
-  id VARCHAR(36) NOT NULL ,
-  name VARCHAR(20) NOT NULL ,
-  phone VARCHAR(15) NOT NULL ,
-  password VARCHAR(50) NOT NULL ,
-  salt VARCHAR(60),
-  status INT DEFAULT 1,
-  deleted INT DEFAULT 0,
-  createTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  createBy VARCHAR(36),
-  updateTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  updateBy VARCHAR(36),
-  PRIMARY KEY (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8
+CREATE TABLE `uc_user_role` (
+  user_id VARCHAR(36) NOT NULL ,
+  role_id VARCHAR(36) NOT NULL ,
+  PRIMARY KEY (user_id,role_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE `uc_role_menu` (
+  role_id VARCHAR(36) NOT NULL ,
+  menu_id VARCHAR(36) NOT NULL ,
+  PRIMARY KEY (role_id,menu_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;

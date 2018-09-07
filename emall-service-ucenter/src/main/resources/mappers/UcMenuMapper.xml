@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shiny.emall.ucenter.dao.UcMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.UcMenu" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="p_code" property="pCode" jdbcType="VARCHAR" />
+    <result column="p_id" property="pId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from uc_menu
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.UcMenu" >
+    insert into uc_menu (id, code, p_code, 
+      p_id, `name`, url, `level`, 
+      sort, `status`, icon)
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{pCode,jdbcType=VARCHAR}, 
+      #{pId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.UcMenu" >
+    update uc_menu
+    set code = #{code,jdbcType=VARCHAR},
+      p_code = #{pCode,jdbcType=VARCHAR},
+      p_id = #{pId,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      `level` = #{level,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, code, p_code, p_id, `name`, url, `level`, sort, `status`, icon
+    from uc_menu
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, code, p_code, p_id, `name`, url, `level`, sort, `status`, icon
+    from uc_menu
+  </select>
+  <select id="selectMenusByRoleId" resultType="com.shiny.emall.common.ucenter.entity.UcMenu">
+    SELECT id, code, p_code, p_id, `name`, url, `level`, sort, `status`, icon
+    from uc_menu where id IN (SELECT menu_id from uc_role_menu WHERE role_id=#{roleId})
+  </select>
+</mapper>
