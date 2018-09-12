@@ -1,11 +1,6 @@
 spring:
   application:
     name: emall-api-gateway
-  datasource:
-    url:  jdbc:mysql://10.1.5.92:3306/mall?useUnicode=true&characterEncoding=utf-8
-    username: root
-    password: root
-    driverClassName: com.mysql.jdbc.Driver
 server:
   port: 8888
 eureka:
@@ -20,10 +15,9 @@ zuul:
     ucenter:
       path: /ucenter/**
       service-id: emall-web-ucenter
-security:
-  oauth2:
-    resource:
-      filter-order: 3
+    authserver:
+      path: /uaa/**
+      service-id: emall-auth-server
 ribbon:
   ReadTimeout: 30000
   SocketTimeout: 30000

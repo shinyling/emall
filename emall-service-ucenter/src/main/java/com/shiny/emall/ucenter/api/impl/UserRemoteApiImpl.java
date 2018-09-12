@@ -8,6 +8,7 @@ import com.shiny.emall.ucenter.dao.UcUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,7 +30,7 @@ public class UserRemoteApiImpl implements UserRemoteApi {
     }
 
     @Override
-    public JsonResult findByUsername(@PathVariable String username) {
+    public JsonResult<UcUser> findByUsername(@RequestParam("username") String username) {
         UcUser user=userMapper.selectByUsername(username);
         return new JsonResult(user);
     }

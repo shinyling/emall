@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 public interface RoleRemoteApi {
 
-    @RequestMapping(value = "/getRolesByUserId",method = RequestMethod.GET)
+    @RequestMapping(value = "/getRolesByUserId",method = RequestMethod.POST)
     JsonResult getRolesByUserId(String userId);
 }

@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 public interface PermissionRemoteApi {
 
-    @RequestMapping(value = "findPermissionsByRoleId",method = RequestMethod.GET)
+    @RequestMapping(value = "findPermissionsByRoleId",method = RequestMethod.POST)
     JsonResult findPermissionsByRoleId(String roleId);
 }

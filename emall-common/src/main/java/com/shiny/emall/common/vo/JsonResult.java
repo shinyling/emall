@@ -11,7 +11,6 @@ import java.io.Serializable;
  * @create 2018/9/7
  */
 @Data
-@NoArgsConstructor
 public class JsonResult<T> implements Serializable {
 
     private Integer code;
@@ -19,6 +18,10 @@ public class JsonResult<T> implements Serializable {
     private String description;
 
     private T data;
+
+    public JsonResult(){
+
+    }
 
     public JsonResult(Integer code, String description,T data) {
         this.code = code;

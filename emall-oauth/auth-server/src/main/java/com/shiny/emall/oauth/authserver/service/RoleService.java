@@ -1,4 +1,4 @@
-package com.shiny.emall.api.gateway.service;
+package com.shiny.emall.oauth.authserver.service;
 
 import com.shiny.emall.ucenter.api.RoleRemoteApi;
 import org.springframework.cloud.netflix.feign.FeignClient;

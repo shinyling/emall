@@ -26,6 +26,7 @@
         <module>emall-api-gateway</module>
         <module>emall-hystrix-turbine</module>
         <module>emall-cache</module>
+        <module>emall-oauth</module>
     </modules>
 
     <properties>

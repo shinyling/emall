@@ -1,8 +1,9 @@
-package com.shiny.emall.api.gateway.service.impl;
+package com.shiny.emall.oauth.authserver.service.impl;
 
-import com.shiny.emall.api.gateway.service.PermissionService;
-import com.shiny.emall.api.gateway.service.RoleService;
-import com.shiny.emall.api.gateway.service.UserService;
+import com.shiny.emall.common.ucenter.entity.UcUser;
+import com.shiny.emall.oauth.authserver.service.PermissionService;
+import com.shiny.emall.oauth.authserver.service.RoleService;
+import com.shiny.emall.oauth.authserver.service.UserService;
 import com.shiny.emall.common.constants.ResultCode;
 import com.shiny.emall.common.ucenter.entity.UcMenu;
 import com.shiny.emall.common.ucenter.entity.UcRole;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -40,7 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        JsonResult userResult=userService.findByUsername(username);
+        JsonResult<UcUser> userResult=userService.findByUsername(username);
         if(!userResult.getCode().equals(ResultCode.OK.getCode())){
             throw new UsernameNotFoundException("用户:" + username + ",不存在!");
         }
@@ -49,9 +51,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         boolean accountNonExpired = true; // 过期性 :true:没过期 false:过期
         boolean credentialsNonExpired = true; // 有效性 :true:凭证有效 false:凭证无效
         boolean accountNonLocked = true; // 锁定性 :true:未锁定 false:已锁定
-        UserVo userVo = new UserVo();
-        BeanUtils.copyProperties(userResult.getData(),userVo);
-        JsonResult<List<UcRole>> roleResult = roleService.getRolesByUserId(userVo.getId());
+        UcUser ucUser=userResult.getData();
+        JsonResult<List<UcRole>> roleResult = roleService.getRolesByUserId(ucUser.getId());
         if(roleResult.getCode().equals(ResultCode.OK.getCode())){
             List<UcRole> roles=roleResult.getData();
             for (UcRole role:roles){
@@ -63,14 +64,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 if (perResult.getCode().equals(ResultCode.OK.getCode())){
                     List<UcMenu> permissionList = perResult.getData();
                     for (UcMenu menu:permissionList) {
-                        GrantedAuthority authority = new SimpleGrantedAuthority(menu.getCode());
+                        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+menu.getCode());
                         grantedAuthorities.add(authority);
                     }
                 }
             }
         }
-        User user = new User(userVo.getUsername(), userVo.getPassword(),
+        User user = new User(ucUser.getUsername(), ucUser.getPassword(),
                 enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuthorities);
         return user;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new BCryptPasswordEncoder().encode("123456"));
     }
 }
