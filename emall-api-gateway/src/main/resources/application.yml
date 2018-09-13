@@ -14,10 +14,26 @@ zuul:
   routes:
     ucenter:
       path: /ucenter/**
+      sensitiveHeaders:
       service-id: emall-web-ucenter
     authserver:
       path: /uaa/**
+      sensitiveHeaders:
       service-id: emall-auth-server
+      stripPrefix: false
+  add-proxy-headers: true
+security:
+  oauth2:
+    sso:
+      loginPath: /login
+    client:
+      accessTokenUri: http://emall-auth-server/uaa/oauth/token
+      userAuthorizationUri: http://localhost:7777/uaa/oauth/authorize
+      clientId: client
+      clientSecret: secret
+    resource:
+      user-info-uri:  http://localhost:7777/uaa/user
+      prefer-token-info: false
 ribbon:
   ReadTimeout: 30000
   SocketTimeout: 30000

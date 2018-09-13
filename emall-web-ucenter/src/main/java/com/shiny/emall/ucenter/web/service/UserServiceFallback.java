@@ -4,6 +4,8 @@ import com.shiny.emall.common.ucenter.entity.UcUser;
 import com.shiny.emall.common.vo.JsonResult;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * @author DELL shiny
  * @create 2018/9/5
@@ -17,6 +19,11 @@ public class UserServiceFallback implements UserService {
 
     @Override
     public JsonResult findByUsername(String username) {
+        return JsonResult.failure("服务降级");
+    }
+
+    @Override
+    public JsonResult<List<UcUser>> list() {
         return JsonResult.failure("服务降级");
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * @author DELL shiny
  * @create 2018/9/5
@@ -18,4 +20,7 @@ public interface UserRemoteApi {
 
     @RequestMapping(value = "/findByUsername",method = RequestMethod.POST)
     JsonResult<UcUser> findByUsername(@RequestParam("username") String username);
+
+    @RequestMapping(value = "list",method = RequestMethod.GET)
+    JsonResult<List<UcUser>> list();
 }

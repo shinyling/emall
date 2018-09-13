@@ -25,4 +25,9 @@ public class UserController {
     public JsonResult findByUsername(@PathVariable String username){
         return userService.findByUsername(username);
     }
+
+    @RequestMapping(value = "/user/list",method = RequestMethod.GET)
+    public JsonResult list(){
+        return userService.list();
+    }
 }

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: emall-resource-server
+  datasource:
+    url:  jdbc:mysql://10.1.5.92:3306/mall?characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+server:
+  port: 7776
+security:
+  oauth2:
+    resource:
+      id: oauth2-resource
+      token-info-uri: http://localhost:7777/oauth/check_token
+      prefer-token-info: true
+logging:
+  config: classpath:log4j2.xml
+eureka:
+  client:
+    serviceUrl:
+     defaultZone: http://localhost:9527/eureka

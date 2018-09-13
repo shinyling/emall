@@ -8,6 +8,9 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
 server:
   port: 7777
+  # Use different context-path to avoid session cookie overlapping
+  context-path: /uaa
+  use-forward-headers: false
 logging:
   config: classpath:log4j2.xml
 eureka:

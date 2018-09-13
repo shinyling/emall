@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author DELL shiny
  * @create 2018/9/5
@@ -33,6 +35,12 @@ public class UserRemoteApiImpl implements UserRemoteApi {
     public JsonResult<UcUser> findByUsername(@RequestParam("username") String username) {
         UcUser user=userMapper.selectByUsername(username);
         return new JsonResult(user);
+    }
+
+    @Override
+    public JsonResult<List<UcUser>> list() {
+        List<UcUser> ucUsers=userMapper.selectAll();
+        return new JsonResult<>(ucUsers);
     }
 
 }
