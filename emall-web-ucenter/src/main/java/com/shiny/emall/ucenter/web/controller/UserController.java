@@ -3,8 +3,11 @@ package com.shiny.emall.ucenter.web.controller;
 import com.shiny.emall.common.ucenter.entity.UcUser;
 import com.shiny.emall.common.vo.JsonResult;
 import com.shiny.emall.ucenter.web.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -16,6 +19,7 @@ import javax.validation.Valid;
  * @author DELL shiny
  * @create 2018/9/5
  */
+@Api(value = "UserController",tags = "用户")
 @Log4j2
 @RestController
 public class UserController {
@@ -23,6 +27,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @ApiOperation(value = "添加用户",notes = "需要身份验证")
     @RequestMapping(value = "/user/add",method = RequestMethod.POST)
     public JsonResult addUser(@Valid @RequestBody UcUser user, BindingResult bindingResult){
         if(bindingResult.hasErrors()){

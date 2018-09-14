@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +37,10 @@ public class UserRemoteApiImpl implements UserRemoteApi {
         user.setId(id);
         BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
+        user.setDeleted(0);
+        user.setStatus(1);
+        user.setCreateTime(new Date());
+        user.setUpdateTime(new Date());
         userMapper.insert(user);
         return JsonResult.ok(user);
     }

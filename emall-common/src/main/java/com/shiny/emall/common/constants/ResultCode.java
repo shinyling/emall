@@ -8,7 +8,7 @@ public enum ResultCode {
 
     OK(200,"请求成功"),
 
-    FAILURE(000,"请求失败");
+    FAILURE(0,"请求失败");
 
     private Integer code;
 
