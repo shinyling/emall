@@ -2,11 +2,13 @@ package com.shiny.emall.ucenter.api;
 
 import com.shiny.emall.common.ucenter.entity.UcUser;
 import com.shiny.emall.common.vo.JsonResult;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**

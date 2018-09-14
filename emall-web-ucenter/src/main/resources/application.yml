@@ -21,3 +21,8 @@ ribbon:
   ConnectTimeout: 30000
 logging:
   config: classpath:log4j2.xml
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:7777/uaa/user
+  enable-csrf: false

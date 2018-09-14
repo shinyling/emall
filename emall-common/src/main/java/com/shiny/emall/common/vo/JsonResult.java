@@ -49,8 +49,8 @@ public class JsonResult<T> implements Serializable {
         return new JsonResult(ResultCode.OK);
     }
 
-    public static JsonResult ok(String msg){
-        return new JsonResult(ResultCode.OK,msg);
+    public static JsonResult ok(Object data){
+        return new JsonResult(data);
     }
 
 

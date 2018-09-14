@@ -1,19 +1,25 @@
 package com.shiny.emall.common.ucenter.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class UcUser implements Serializable {
+
     private String id;
 
     private String avatar;
 
+    @NotEmpty(message = "用户名不能为空")
     private String username;
 
+    @NotEmpty(message = "电话不能为空")
     private String phone;
 
     private String name;
 
+    @NotEmpty(message = "密码不能为空")
     private String password;
 
     private String salt;
