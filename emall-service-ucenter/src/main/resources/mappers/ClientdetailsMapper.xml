@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.ClientdetailsMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.Clientdetails">
+    <id column="appId" jdbcType="VARCHAR" property="appid" />
+    <result column="resourceIds" jdbcType="VARCHAR" property="resourceids" />
+    <result column="appSecret" jdbcType="VARCHAR" property="appsecret" />
+    <result column="scope" jdbcType="VARCHAR" property="scope" />
+    <result column="grantTypes" jdbcType="VARCHAR" property="granttypes" />
+    <result column="redirectUrl" jdbcType="VARCHAR" property="redirecturl" />
+    <result column="authorities" jdbcType="VARCHAR" property="authorities" />
+    <result column="access_token_validity" jdbcType="INTEGER" property="accessTokenValidity" />
+    <result column="refresh_token_validity" jdbcType="INTEGER" property="refreshTokenValidity" />
+    <result column="additionalInformation" jdbcType="VARCHAR" property="additionalinformation" />
+    <result column="autoApproveScopes" jdbcType="VARCHAR" property="autoapprovescopes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ClientDetails
+    where appId = #{appid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.Clientdetails">
+    insert into ClientDetails (appId, resourceIds, appSecret, 
+      `scope`, grantTypes, redirectUrl, 
+      authorities, access_token_validity, refresh_token_validity, 
+      additionalInformation, autoApproveScopes
+      )
+    values (#{appid,jdbcType=VARCHAR}, #{resourceids,jdbcType=VARCHAR}, #{appsecret,jdbcType=VARCHAR}, 
+      #{scope,jdbcType=VARCHAR}, #{granttypes,jdbcType=VARCHAR}, #{redirecturl,jdbcType=VARCHAR}, 
+      #{authorities,jdbcType=VARCHAR}, #{accessTokenValidity,jdbcType=INTEGER}, #{refreshTokenValidity,jdbcType=INTEGER}, 
+      #{additionalinformation,jdbcType=VARCHAR}, #{autoapprovescopes,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.Clientdetails">
+    update ClientDetails
+    set resourceIds = #{resourceids,jdbcType=VARCHAR},
+      appSecret = #{appsecret,jdbcType=VARCHAR},
+      `scope` = #{scope,jdbcType=VARCHAR},
+      grantTypes = #{granttypes,jdbcType=VARCHAR},
+      redirectUrl = #{redirecturl,jdbcType=VARCHAR},
+      authorities = #{authorities,jdbcType=VARCHAR},
+      access_token_validity = #{accessTokenValidity,jdbcType=INTEGER},
+      refresh_token_validity = #{refreshTokenValidity,jdbcType=INTEGER},
+      additionalInformation = #{additionalinformation,jdbcType=VARCHAR},
+      autoApproveScopes = #{autoapprovescopes,jdbcType=VARCHAR}
+    where appId = #{appid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select appId, resourceIds, appSecret, `scope`, grantTypes, redirectUrl, authorities, 
+    access_token_validity, refresh_token_validity, additionalInformation, autoApproveScopes
+    from ClientDetails
+    where appId = #{appid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select appId, resourceIds, appSecret, `scope`, grantTypes, redirectUrl, authorities, 
+    access_token_validity, refresh_token_validity, additionalInformation, autoApproveScopes
+    from ClientDetails
+  </select>
+</mapper>

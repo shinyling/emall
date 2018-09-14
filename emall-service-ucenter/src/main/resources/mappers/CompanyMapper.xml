@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.Company">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_code" jdbcType="VARCHAR" property="companyCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="web_site" jdbcType="VARCHAR" property="webSite" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="bank" jdbcType="VARCHAR" property="bank" />
+    <result column="bank_account" jdbcType="VARCHAR" property="bankAccount" />
+    <result column="legal_name" jdbcType="VARCHAR" property="legalName" />
+    <result column="legal_tel" jdbcType="VARCHAR" property="legalTel" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_company
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.Company">
+    insert into t_company (id, parent_id, company_name, 
+      company_code, create_time, zip_code, 
+      address, email, web_site, 
+      fax, tel, bank, bank_account, 
+      legal_name, legal_tel)
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{companyCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{zipCode,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{webSite,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR}, 
+      #{legalName,jdbcType=VARCHAR}, #{legalTel,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.Company">
+    update t_company
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      web_site = #{webSite,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      bank_account = #{bankAccount,jdbcType=VARCHAR},
+      legal_name = #{legalName,jdbcType=VARCHAR},
+      legal_tel = #{legalTel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, parent_id, company_name, company_code, create_time, zip_code, address, 
+    email, web_site, fax, tel, bank, bank_account, legal_name, legal_tel
+    from t_company
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, parent_id, company_name, company_code, create_time, zip_code, address, 
+    email, web_site, fax, tel, bank, bank_account, legal_name, legal_tel
+    from t_company
+  </select>
+</mapper>

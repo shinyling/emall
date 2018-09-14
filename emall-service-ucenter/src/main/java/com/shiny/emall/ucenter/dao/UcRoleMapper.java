@@ -8,11 +8,10 @@ public interface UcRoleMapper {
 
     int insert(UcRole record);
 
-    UcRole selectByPrimaryKey(String id);
+    List<UcRole> selectRolesByUserId(String userId);
 
-    List<UcRole> selectAll();
+    UcRole selectByPrimaryKey(String id);
 
     int updateByPrimaryKey(UcRole record);
 
-    List<UcRole> selectRolesByUserId(String userId);
 }

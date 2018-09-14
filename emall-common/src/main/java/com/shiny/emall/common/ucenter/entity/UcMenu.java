@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class UcMenu implements Serializable {
     private String id;
 
+    private String appId;
+
     private String code;
 
     private String pCode;
@@ -31,6 +33,14 @@ public class UcMenu implements Serializable {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId == null ? null : appId.trim();
     }
 
     public String getCode() {
@@ -112,6 +122,7 @@ public class UcMenu implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", appId=").append(appId);
         sb.append(", code=").append(code);
         sb.append(", pCode=").append(pCode);
         sb.append(", pId=").append(pId);

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.Employee">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="dept_id" jdbcType="VARCHAR" property="deptId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="employee_code" jdbcType="VARCHAR" property="employeeCode" />
+    <result column="employee_position" jdbcType="VARCHAR" property="employeePosition" />
+    <result column="entry_time" jdbcType="TIMESTAMP" property="entryTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_employee
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.Employee">
+    insert into t_employee (id, user_id, company_id, 
+      dept_id, create_time, employee_code, 
+      employee_position, entry_time)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{deptId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{employeeCode,jdbcType=VARCHAR}, 
+      #{employeePosition,jdbcType=VARCHAR}, #{entryTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.Employee">
+    update t_employee
+    set user_id = #{userId,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      employee_code = #{employeeCode,jdbcType=VARCHAR},
+      employee_position = #{employeePosition,jdbcType=VARCHAR},
+      entry_time = #{entryTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, user_id, company_id, dept_id, create_time, employee_code, employee_position, 
+    entry_time
+    from t_employee
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, company_id, dept_id, create_time, employee_code, employee_position, 
+    entry_time
+    from t_employee
+  </select>
+</mapper>

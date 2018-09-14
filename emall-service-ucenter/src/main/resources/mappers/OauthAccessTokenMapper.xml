@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.OauthAccessTokenMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.OauthAccessToken">
+    <id column="authentication_id" jdbcType="VARCHAR" property="authenticationId" />
+    <result column="token_id" jdbcType="VARCHAR" property="tokenId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="client_id" jdbcType="VARCHAR" property="clientId" />
+    <result column="refresh_token" jdbcType="VARCHAR" property="refreshToken" />
+    <result column="token" jdbcType="LONGVARBINARY" property="token" />
+    <result column="authentication" jdbcType="LONGVARBINARY" property="authentication" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from oauth_access_token
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.OauthAccessToken">
+    insert into oauth_access_token (authentication_id, token_id, user_name, 
+      client_id, refresh_token, token, 
+      authentication)
+    values (#{authenticationId,jdbcType=VARCHAR}, #{tokenId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{clientId,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, #{token,jdbcType=LONGVARBINARY}, 
+      #{authentication,jdbcType=LONGVARBINARY})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.OauthAccessToken">
+    update oauth_access_token
+    set token_id = #{tokenId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      client_id = #{clientId,jdbcType=VARCHAR},
+      refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      token = #{token,jdbcType=LONGVARBINARY},
+      authentication = #{authentication,jdbcType=LONGVARBINARY}
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select authentication_id, token_id, user_name, client_id, refresh_token, token, authentication
+    from oauth_access_token
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select authentication_id, token_id, user_name, client_id, refresh_token, token, authentication
+    from oauth_access_token
+  </select>
+</mapper>

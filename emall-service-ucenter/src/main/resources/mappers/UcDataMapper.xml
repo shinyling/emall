@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.UcDataMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.UcData">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="data_code" jdbcType="VARCHAR" property="dataCode" />
+    <result column="data_name" jdbcType="VARCHAR" property="dataName" />
+    <result column="data_class" jdbcType="VARCHAR" property="dataClass" />
+    <result column="data_expression" jdbcType="VARCHAR" property="dataExpression" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from uc_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.UcData">
+    insert into uc_data (id, app_id, data_code, 
+      data_name, data_class, data_expression, 
+      order_num)
+    values (#{id,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{dataCode,jdbcType=VARCHAR}, 
+      #{dataName,jdbcType=VARCHAR}, #{dataClass,jdbcType=VARCHAR}, #{dataExpression,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.UcData">
+    update uc_data
+    set app_id = #{appId,jdbcType=VARCHAR},
+      data_code = #{dataCode,jdbcType=VARCHAR},
+      data_name = #{dataName,jdbcType=VARCHAR},
+      data_class = #{dataClass,jdbcType=VARCHAR},
+      data_expression = #{dataExpression,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, app_id, data_code, data_name, data_class, data_expression, order_num
+    from uc_data
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, app_id, data_code, data_name, data_class, data_expression, order_num
+    from uc_data
+  </select>
+</mapper>

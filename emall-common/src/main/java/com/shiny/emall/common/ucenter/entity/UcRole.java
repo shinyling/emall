@@ -6,6 +6,10 @@ import java.util.Date;
 public class UcRole implements Serializable {
     private String id;
 
+    private String appId;
+
+    private String companyId;
+
     private String name;
 
     private String value;
@@ -28,6 +32,22 @@ public class UcRole implements Serializable {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId == null ? null : appId.trim();
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId == null ? null : companyId.trim();
     }
 
     public String getName() {
@@ -93,6 +113,8 @@ public class UcRole implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", appId=").append(appId);
+        sb.append(", companyId=").append(companyId);
         sb.append(", name=").append(name);
         sb.append(", value=").append(value);
         sb.append(", createTime=").append(createTime);

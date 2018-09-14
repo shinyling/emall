@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.OauthClientTokenMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.OauthClientToken">
+    <id column="authentication_id" jdbcType="VARCHAR" property="authenticationId" />
+    <result column="token_id" jdbcType="VARCHAR" property="tokenId" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="client_id" jdbcType="VARCHAR" property="clientId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from oauth_client_token
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.OauthClientToken">
+    insert into oauth_client_token (authentication_id, token_id, token, 
+      user_name, client_id)
+    values (#{authenticationId,jdbcType=VARCHAR}, #{tokenId,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{clientId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.OauthClientToken">
+    update oauth_client_token
+    set token_id = #{tokenId,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      client_id = #{clientId,jdbcType=VARCHAR}
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select authentication_id, token_id, token, user_name, client_id
+    from oauth_client_token
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select authentication_id, token_id, token, user_name, client_id
+    from oauth_client_token
+  </select>
+</mapper>

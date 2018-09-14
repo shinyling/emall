@@ -1,31 +1,37 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shiny.emall.ucenter.dao.UcRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.UcRole" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="value" property="value" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.UcRoleMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.UcRole">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from uc_role
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.UcRole" >
-    insert into uc_role (id, `name`, `value`, 
-      create_time, create_by, update_time, 
-      update_by, `status`)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.UcRole">
+    insert into uc_role (id, app_id, company_id,
+      `name`, `value`, create_time,
+      create_by, update_time, update_by,
+      `status`)
+    values (#{id,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+      #{status,jdbcType=INTEGER})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.UcRole" >
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.UcRole">
     update uc_role
-    set `name` = #{name,jdbcType=VARCHAR},
+    set app_id = #{appId,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
       `value` = #{value,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_by = #{createBy,jdbcType=VARCHAR},
@@ -34,17 +40,15 @@
       `status` = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select id, `name`, `value`, create_time, create_by, update_time, update_by, `status`
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, app_id, company_id, `name`, `value`, create_time, create_by, update_time,
+    update_by, `status`
     from uc_role
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, `name`, `value`, create_time, create_by, update_time, update_by, `status`
-    from uc_role
-  </select>
+
   <select id="selectRolesByUserId" resultType="com.shiny.emall.common.ucenter.entity.UcRole">
-    select id, `name`, `value`, create_time, create_by, update_time, update_by, `status`
+    select id,app_id,company_id, `name`, `value`, create_time, create_by, update_time, update_by, `status`
     from uc_role WHERE id IN (SELECT role_id from uc_user_role where user_id=#{userId})
   </select>
 </mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.UcRoleButtonMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.UcRoleButton">
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <id column="button_id" jdbcType="VARCHAR" property="buttonId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from uc_role_button
+    where role_id = #{roleId,jdbcType=VARCHAR}
+      and button_id = #{buttonId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.UcRoleButton">
+    insert into uc_role_button (role_id, button_id)
+    values (#{roleId,jdbcType=VARCHAR}, #{buttonId,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select role_id, button_id
+    from uc_role_button
+  </select>
+</mapper>

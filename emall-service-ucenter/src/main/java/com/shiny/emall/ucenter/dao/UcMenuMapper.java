@@ -6,13 +6,12 @@ import java.util.List;
 public interface UcMenuMapper {
     int deleteByPrimaryKey(String id);
 
+    List<UcMenu> selectMenusByRoleId(String roleId);
+
     int insert(UcMenu record);
 
     UcMenu selectByPrimaryKey(String id);
 
-    List<UcMenu> selectAll();
-
     int updateByPrimaryKey(UcMenu record);
 
-    List<UcMenu> selectMenusByRoleId(String roleId);
 }

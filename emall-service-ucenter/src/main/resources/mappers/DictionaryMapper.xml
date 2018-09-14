@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.DictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.Dictionary">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="dic_code" jdbcType="VARCHAR" property="dicCode" />
+    <result column="parent_code" jdbcType="VARCHAR" property="parentCode" />
+    <result column="dic_name" jdbcType="VARCHAR" property="dicName" />
+    <result column="dic_desc" jdbcType="VARCHAR" property="dicDesc" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_dictionary
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.Dictionary">
+    insert into t_dictionary (id, dic_code, parent_code, 
+      dic_name, dic_desc)
+    values (#{id,jdbcType=VARCHAR}, #{dicCode,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR}, 
+      #{dicName,jdbcType=VARCHAR}, #{dicDesc,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.Dictionary">
+    update t_dictionary
+    set dic_code = #{dicCode,jdbcType=VARCHAR},
+      parent_code = #{parentCode,jdbcType=VARCHAR},
+      dic_name = #{dicName,jdbcType=VARCHAR},
+      dic_desc = #{dicDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, dic_code, parent_code, dic_name, dic_desc
+    from t_dictionary
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, dic_code, parent_code, dic_name, dic_desc
+    from t_dictionary
+  </select>
+</mapper>

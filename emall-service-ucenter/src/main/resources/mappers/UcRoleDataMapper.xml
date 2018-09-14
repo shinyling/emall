@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.UcRoleDataMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.UcRoleData">
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <id column="data_id" jdbcType="VARCHAR" property="dataId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from uc_role_data
+    where role_id = #{roleId,jdbcType=VARCHAR}
+      and data_id = #{dataId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.UcRoleData">
+    insert into uc_role_data (role_id, data_id)
+    values (#{roleId,jdbcType=VARCHAR}, #{dataId,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select role_id, data_id
+    from uc_role_data
+  </select>
+</mapper>

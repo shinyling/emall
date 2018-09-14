@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.UcAppMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.UcApp">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="secret_key" jdbcType="VARCHAR" property="secretKey" />
+    <result column="app_logo" jdbcType="VARCHAR" property="appLogo" />
+    <result column="index_url" jdbcType="VARCHAR" property="indexUrl" />
+    <result column="user_notify_url" jdbcType="VARCHAR" property="userNotifyUrl" />
+    <result column="dept_notify_url" jdbcType="VARCHAR" property="deptNotifyUrl" />
+    <result column="logout_notify_url" jdbcType="VARCHAR" property="logoutNotifyUrl" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from uc_app
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.UcApp">
+    insert into uc_app (id, app_name, secret_key, 
+      app_logo, index_url, user_notify_url, 
+      dept_notify_url, logout_notify_url)
+    values (#{id,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, #{secretKey,jdbcType=VARCHAR}, 
+      #{appLogo,jdbcType=VARCHAR}, #{indexUrl,jdbcType=VARCHAR}, #{userNotifyUrl,jdbcType=VARCHAR}, 
+      #{deptNotifyUrl,jdbcType=VARCHAR}, #{logoutNotifyUrl,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.UcApp">
+    update uc_app
+    set app_name = #{appName,jdbcType=VARCHAR},
+      secret_key = #{secretKey,jdbcType=VARCHAR},
+      app_logo = #{appLogo,jdbcType=VARCHAR},
+      index_url = #{indexUrl,jdbcType=VARCHAR},
+      user_notify_url = #{userNotifyUrl,jdbcType=VARCHAR},
+      dept_notify_url = #{deptNotifyUrl,jdbcType=VARCHAR},
+      logout_notify_url = #{logoutNotifyUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, app_name, secret_key, app_logo, index_url, user_notify_url, dept_notify_url, 
+    logout_notify_url
+    from uc_app
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, app_name, secret_key, app_logo, index_url, user_notify_url, dept_notify_url, 
+    logout_notify_url
+    from uc_app
+  </select>
+</mapper>

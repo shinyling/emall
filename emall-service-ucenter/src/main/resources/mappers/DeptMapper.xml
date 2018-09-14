@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.DeptMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.Dept">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="dept_code" jdbcType="VARCHAR" property="deptCode" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_dept
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.Dept">
+    insert into t_dept (id, parent_id, company_id, 
+      dept_name, create_time, dept_code, 
+      tel, fax, zip_code, 
+      address)
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{deptName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{deptCode,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.Dept">
+    update t_dept
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      dept_name = #{deptName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      dept_code = #{deptCode,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, parent_id, company_id, dept_name, create_time, dept_code, tel, fax, zip_code, 
+    address
+    from t_dept
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, parent_id, company_id, dept_name, create_time, dept_code, tel, fax, zip_code, 
+    address
+    from t_dept
+  </select>
+</mapper>

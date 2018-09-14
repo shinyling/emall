@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.UcButtonMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.UcButton">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="button_code" jdbcType="VARCHAR" property="buttonCode" />
+    <result column="button_name" jdbcType="VARCHAR" property="buttonName" />
+    <result column="button_class" jdbcType="VARCHAR" property="buttonClass" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from uc_button
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.UcButton">
+    insert into uc_button (id, app_id, button_code, 
+      button_name, button_class, order_num
+      )
+    values (#{id,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{buttonCode,jdbcType=VARCHAR}, 
+      #{buttonName,jdbcType=VARCHAR}, #{buttonClass,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shiny.emall.common.ucenter.entity.UcButton">
+    update uc_button
+    set app_id = #{appId,jdbcType=VARCHAR},
+      button_code = #{buttonCode,jdbcType=VARCHAR},
+      button_name = #{buttonName,jdbcType=VARCHAR},
+      button_class = #{buttonClass,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, app_id, button_code, button_name, button_class, order_num
+    from uc_button
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, app_id, button_code, button_name, button_class, order_num
+    from uc_button
+  </select>
+</mapper>

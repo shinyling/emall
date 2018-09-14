@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiny.emall.ucenter.dao.OauthRefreshTokenMapper">
+  <resultMap id="BaseResultMap" type="com.shiny.emall.common.ucenter.entity.OauthRefreshToken">
+    <result column="token_id" jdbcType="VARCHAR" property="tokenId" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="authentication" jdbcType="VARCHAR" property="authentication" />
+  </resultMap>
+  <insert id="insert" parameterType="com.shiny.emall.common.ucenter.entity.OauthRefreshToken">
+    insert into oauth_refresh_token (token_id, token, authentication
+      )
+    values (#{tokenId,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{authentication,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select token_id, token, authentication
+    from oauth_refresh_token
+  </select>
+</mapper>
