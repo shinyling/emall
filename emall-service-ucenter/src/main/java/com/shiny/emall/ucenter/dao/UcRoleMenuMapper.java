@@ -10,4 +10,6 @@ public interface UcRoleMenuMapper {
     int insert(UcRoleMenu record);
 
     List<UcRoleMenu> selectAll();
+
+    int checkExists(@Param("roleId") String roleId,@Param("menuId") String menuId);
 }

@@ -10,4 +10,6 @@ public interface UcUserRoleMapper {
     int insert(UcUserRole record);
 
     List<UcUserRole> selectAll();
+
+    int checkExists(@Param("userId") String userId,@Param("roleId") String roleId);
 }

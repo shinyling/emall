@@ -14,4 +14,5 @@ public interface UcMenuMapper {
 
     int updateByPrimaryKey(UcMenu record);
 
+    UcMenu selectMenuByPath(String path);
 }

@@ -21,6 +21,9 @@ zuul:
       sensitiveHeaders:
       service-id: emall-auth-server
       stripPrefix: false
+    vue:
+      path: /**
+      url: http://localhost:8080/
   add-proxy-headers: true
 security:
   oauth2:

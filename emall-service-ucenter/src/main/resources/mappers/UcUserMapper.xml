@@ -54,7 +54,7 @@
   </select>
 
   <select id="selectByUsername" resultType="com.shiny.emall.common.ucenter.entity.UcUser">
-    select id, avatar, username, phone, `name`, `password`, salt, birthday, sex, email,
+    select id, username, phone, `password`, salt, open_id,
       `status`, deleted, create_time, create_by, update_time, update_by
     from uc_user WHERE username=#{username} and status=1 and deleted=0
   </select>

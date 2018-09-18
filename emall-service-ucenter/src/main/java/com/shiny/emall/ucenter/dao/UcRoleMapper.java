@@ -14,4 +14,6 @@ public interface UcRoleMapper {
 
     int updateByPrimaryKey(UcRole record);
 
+    UcRole selectByValue(String value);
+
 }

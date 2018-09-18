@@ -52,4 +52,7 @@
     SELECT id,app_id, code, p_code, p_id, `name`, url, `level`, sort, `status`, icon
     from uc_menu where id IN (SELECT menu_id from uc_role_menu WHERE role_id=#{roleId})
   </select>
+  <select id="selectMenuByPath" resultType="com.shiny.emall.common.ucenter.entity.UcMenu">
+    SELECT * from uc_menu WHERE url=#{path}
+  </select>
 </mapper>
