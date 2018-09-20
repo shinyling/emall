@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {getToken, setToken, removeToken} from '../utils/token'
 
 import { constantRouterMap } from '@/router'
 
@@ -30,11 +31,10 @@ export default new Vuex.Store({
       state.user.name = username
     },
     setAccessToken (state, token) {
-      localStorage.setItem('access_token', token)
       state.access_token = token
     },
     logout (state) {
-      localStorage.removeItem('access_token')
+      removeToken()
       localStorage.removeItem('userId')
       localStorage.removeItem('username')
       state.access_token = null
@@ -45,10 +45,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    storeToken({commit},token){
+      setToken(token)
+      commit('setAccessToken', token)
+    },
     refresh ({commit}) {
       commit('setUserId', localStorage.getItem('userId'))
       commit('setUsername', localStorage.getItem('username'))
-      commit('setAccessToken', localStorage.getItem('access_token'))
+      commit('setAccessToken', getToken())
     },
     clear ({commit}) {
       commit('logout')

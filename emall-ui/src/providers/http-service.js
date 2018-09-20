@@ -1,47 +1,61 @@
 import axios from 'axios'
 import router from '../router'
-import store from '../store/store'
+import qs from 'qs'
+import {getToken} from '../utils/token'
+import {Notice, Message} from 'iview'
 
-axios.defaults.timeout = 5000
+const service = axios.create({
+  timeout: 15000
+})
+
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
-axios.interceptors.request.use(config => {
+service.interceptors.request.use(config => {
   config.data = JSON.stringify(config.data)
-  if (store.state.access_token) {
-    config.headers.access_token = store.state.access_token
+  if (getToken()) {
+    config.headers['Authorization'] = 'Bearer ' + getToken()
   }
-
   return config
 }, error => {
+  console.log(error)
   return Promise.reject(error)
 })
 
-axios.interceptors.response.use(
+service.interceptors.response.use(
   response => {
     var result = response.data
-    if (result.code === 200) {
-      return result
-    } else if (result.code === 401) {
+    if (result.status === 200) {
+      return result.data
+    } else if (result.status === 401) {
       router.replace({
         path: '/',
         query: {redirect: router.currentRoute.fullPath}
       })
     } else {
+      errorMessage(result.msg)
     }
   }, error => {
     switch (error.response.status) {
       case 401: {
-        store.commit('logout')
         router.replace({
           path: '/',
           query: {redirect: router.currentRoute.fullPath}
         })
         break
       }
+      default: errorMessage(error.message)
     }
     return Promise.reject(error)
   }
 )
+export const POST_HEADER = (url, params, headers) => {
+  return axios({
+    method: 'post',
+    url: `${url}`,
+    data: qs.stringify(params),
+    headers : headers
+  })
+}
 
 export const POST = (url, params) => {
   return axios.post(`${url}`, params).then(res => res.data)
@@ -63,4 +77,16 @@ export const PATCH = (url, params) => {
   return axios.patch(`${url}`, params).then(res => res.data)
 }
 
-export default axios
+export function sucessMessage (msg) {
+  Message.success(msg)
+}
+
+export function errorMessage (msg) {
+  Notice.error({
+    title: '错误提示',
+    desc: msg,
+    duration: 6
+  })
+}
+
+export default service

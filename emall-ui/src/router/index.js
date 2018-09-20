@@ -1,18 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '@/store/store'
+import store from '../store/store'
 import Layout from '@/components/layout/Layout'
 import Home from '@/components/page/Home'
+import {getToken} from '@/utils/token'
 
 Vue.use(Router)
 
-if (window.localStorage.getItem('token')) {
-  store.commit('setAccessToken', window.localStorage.getItem('access_token'))
-  store.commit('setUserId', window.localStorage.getItem('userId'))
-  store.commit('setUsername', window.localStorage.getItem('username'))
+if (getToken()) {
+  store.commit('setAccessToken', getToken())
 }
 export const constantRouterMap = [
   {
+    path: '/login',
+    name: '登录',
+    component: () => import('@/components/page/login')
+  }, {
     path: '/',
     name: '主页',
     redirect: 'home',
@@ -37,7 +40,7 @@ router.beforeEach((to, from, next) => {
     } else {
       console.log(JSON.stringify(store.state))
       next({
-        path: '/',
+        path: '/login',
         query: {redirect: to.fullPath}
       })
     }
