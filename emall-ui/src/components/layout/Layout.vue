@@ -1,9 +1,10 @@
 <template>
-  <div class="wrapper" style="height: auto; min-height: 100%;">
-    <header-div></header-div>
-    <left-div></left-div>
-    <right-div></right-div>
-    <footer-div></footer-div>
+  <div class="layout">
+    <Layout>
+      <header-div></header-div>
+      <Layout><left-div></left-div><Layout><right-div></right-div></Layout></Layout>
+      <footer-div></footer-div>
+    </Layout>
   </div>
 </template>
 
@@ -21,10 +22,11 @@ export default {
 </script>
 
 <style scoped>
-  .container{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
+  .layout{
+    border: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
   }
 </style>

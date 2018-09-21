@@ -1,20 +1,15 @@
 <template>
-  <div class="content-wrapper" style="min-height: 900px;">
-    <section class="content-header">
-      <h1>
-        Dashboard
-        <small>Control panel</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="/home/home"><i class="fa fa-dashboard"></i>主页</a></li>
-        <li class="active">{{pathName}}</li>
-      </ol>
-    </section>
-    <transition name="fade" mode="out-in">
-      <section class="content">
-        <router-view :key="key"></router-view>
-      </section>
-    </transition>
+  <div>
+    <Layout :style="{padding: '0 24px 24px'}">
+      <Breadcrumb :style="{margin: '24px 0'}">
+        <BreadcrumbItem>Home</BreadcrumbItem>
+        <BreadcrumbItem>Components</BreadcrumbItem>
+        <BreadcrumbItem>Layout</BreadcrumbItem>
+      </Breadcrumb>
+      <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
+        Content
+      </Content>
+    </Layout>
   </div>
 </template>
 
