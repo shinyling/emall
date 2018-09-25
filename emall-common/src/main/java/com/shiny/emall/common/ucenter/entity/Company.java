@@ -1,5 +1,7 @@
 package com.shiny.emall.common.ucenter.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,6 +10,7 @@ public class Company implements Serializable {
 
     private String parentId;
 
+    @NotBlank(message = "公司名称不能为空")
     private String companyName;
 
     private String companyCode;
@@ -16,6 +19,7 @@ public class Company implements Serializable {
 
     private String zipCode;
 
+    @NotBlank(message = "公司地址不能为空")
     private String address;
 
     private String email;
@@ -30,6 +34,7 @@ public class Company implements Serializable {
 
     private String bankAccount;
 
+    @NotBlank(message = "公司法人不能为空")
     private String legalName;
 
     private String legalTel;

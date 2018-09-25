@@ -1,6 +1,8 @@
 package com.shiny.emall.ucenter.dao;
 
 import com.shiny.emall.common.ucenter.entity.UcMenu;
+import com.shiny.emall.common.ucenter.vo.MenuVo;
+
 import java.util.List;
 
 public interface UcMenuMapper {
@@ -15,4 +17,6 @@ public interface UcMenuMapper {
     int updateByPrimaryKey(UcMenu record);
 
     UcMenu selectMenuByPath(String path);
+
+    List<MenuVo> selectMenusByUserId(String userId);
 }

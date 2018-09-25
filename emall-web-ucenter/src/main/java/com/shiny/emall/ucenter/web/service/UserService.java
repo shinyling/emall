@@ -9,4 +9,5 @@ import org.springframework.cloud.netflix.feign.FeignClient;
  */
 @FeignClient(value = "emall-service-ucenter",fallback = UserServiceFallback.class)
 public interface UserService extends UserRemoteApi {
+
 }

@@ -18,10 +18,4 @@ public class RoleVo implements Serializable {
 
     private String value;
 
-    private Date createTime;
-
-    private Date updateTime;
-
-    private Integer status;
-
 }

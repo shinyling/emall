@@ -18,6 +18,8 @@ public class MenuVo implements Serializable{
 
     private String pCode;
 
+    private String appId;
+
     private String pId;
 
     private String name;
@@ -28,12 +30,6 @@ public class MenuVo implements Serializable{
 
     private Integer sort;
 
-    private Integer status;
-
     private String icon;
-
-    private Date createTime;
-
-    private Date updateTime;
 
 }

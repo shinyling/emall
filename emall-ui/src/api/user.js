@@ -9,5 +9,8 @@ export default {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
     return request.POST_HEADER('/auth/oauth/token', {username, password, grant_type, scope}, headers)
+  },
+  getUserInfo: () => {
+    return request.GET('/ucenter/user/info')
   }
 }

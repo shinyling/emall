@@ -13,4 +13,8 @@ public interface UcButtonMapper {
     List<UcButton> selectAll();
 
     int updateByPrimaryKey(UcButton record);
+
+    List<UcButton> selectButtonsByUserId(String userId);
+
+    UcButton selectByButtonName(String buttonName);
 }

@@ -1,6 +1,8 @@
 package com.shiny.emall.ucenter.dao;
 
 import com.shiny.emall.common.ucenter.entity.User;
+import com.shiny.emall.common.ucenter.vo.UserVo;
+
 import java.util.List;
 
 public interface UserMapper {
@@ -13,4 +15,8 @@ public interface UserMapper {
     List<User> selectAll();
 
     int updateByPrimaryKey(User record);
+
+    UserVo selectVoByUserId(String userId);
+
+    User selectByUserId(String userId);
 }

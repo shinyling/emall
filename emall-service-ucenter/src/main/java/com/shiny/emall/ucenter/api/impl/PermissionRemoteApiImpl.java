@@ -1,6 +1,7 @@
 package com.shiny.emall.ucenter.api.impl;
 
 import com.shiny.emall.common.ucenter.entity.UcMenu;
+import com.shiny.emall.common.ucenter.vo.MenuVo;
 import com.shiny.emall.common.vo.JsonResult;
 import com.shiny.emall.ucenter.api.PermissionRemoteApi;
 import com.shiny.emall.ucenter.dao.UcMenuMapper;
@@ -24,4 +25,5 @@ public class PermissionRemoteApiImpl implements PermissionRemoteApi{
         List<UcMenu> menuList=menuMapper.selectMenusByRoleId(roleId);
         return new JsonResult(menuList);
     }
+
 }

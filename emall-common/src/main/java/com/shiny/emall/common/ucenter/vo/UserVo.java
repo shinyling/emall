@@ -1,9 +1,11 @@
 package com.shiny.emall.common.ucenter.vo;
 
+import com.shiny.emall.common.ucenter.entity.UcButton;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author DELL shiny
@@ -32,9 +34,7 @@ public class UserVo implements Serializable {
 
     private String phone;
 
-    private Integer status;
+    private List<MenuVo> menus;
 
-    private Date createTime;
-
-    private Date updateTime;
+    private List<UcButton> resources;
 }

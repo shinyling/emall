@@ -14,6 +14,18 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
   </resultMap>
+  <resultMap id="VoResultMap" type="com.shiny.emall.common.ucenter.vo.MenuVo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="p_code" jdbcType="VARCHAR" property="pCode" />
+    <result column="p_id" jdbcType="VARCHAR" property="pId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from uc_menu
     where id = #{id,jdbcType=VARCHAR}
@@ -54,5 +66,11 @@
   </select>
   <select id="selectMenuByPath" resultType="com.shiny.emall.common.ucenter.entity.UcMenu">
     SELECT * from uc_menu WHERE url=#{path}
+  </select>
+  <select id="selectMenusByUserId" resultMap="VoResultMap">
+    SELECT id,app_id, code, p_code, p_id, `name`, url, `level`, sort, icon
+    from uc_menu WHERE id IN (SELECT menu_id FROM uc_role_menu WHERE role_id IN (
+      SELECT role_id FROM  uc_user_role WHERE user_id=#{userId}
+    ))
   </select>
 </mapper>

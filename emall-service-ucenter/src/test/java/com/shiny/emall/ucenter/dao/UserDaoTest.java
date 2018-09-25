@@ -1,6 +1,7 @@
 package com.shiny.emall.ucenter.dao;
 
 import com.shiny.emall.common.ucenter.entity.*;
+import com.shiny.emall.common.ucenter.vo.UserVo;
 import com.shiny.emall.common.utils.IdUtils;
 import com.shiny.emall.ucenter.UcenterApplication;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,16 +31,26 @@ public class UserDaoTest {
     private UcMenuMapper ucMenuMapper;
 
     @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
     private UcRoleMenuMapper ucRoleMenuMapper;
+
+    @Autowired
+    private UcButtonMapper ucButtonMapper;
+
+    @Autowired
+    private UcRoleButtonMapper ucRoleButtonMapper;
 
     @Test
     public void initAuthSystem(){
+        String temp=null;
         String userId=null;
         UcUser ucUser=ucUserMapper.selectByUsername("shiny");
         if(ucUser==null){
             ucUser=new UcUser();
-            userId=IdUtils.id();
-            ucUser.setId(userId);
+            temp=IdUtils.id();
+            ucUser.setId(temp);
             ucUser.setUpdateTime(new Date());
             ucUser.setCreateTime(new Date());
             ucUser.setPassword(new BCryptPasswordEncoder().encode("123456"));
@@ -48,7 +60,24 @@ public class UserDaoTest {
             ucUser.setUsername("shiny");
             ucUserMapper.insert(ucUser);
         }else {
-            userId=ucUser.getId();
+            temp=ucUser.getId();
+        }
+        User user=userMapper.selectByUserId(temp);
+        if(user!=null){
+            userId=user.getId();
+        }else {
+            user=new User();
+            userId=IdUtils.id();
+            user.setId(userId);
+            user.setUserId(temp);
+            user.setAvatar("/tmp/logo.png");
+            user.setBirthday(new Date());
+            user.setCreateTime(new Date());
+            user.setEmail("shiny123400@163.com");
+            user.setIdcard("1231231");
+            user.setSex(1);
+            user.setUserName("shiny.ling");
+            userMapper.insert(user);
         }
         String roleId=null;
         UcRole ucRole=ucRoleMapper.selectByValue("ADMIN");
@@ -80,6 +109,18 @@ public class UserDaoTest {
         }else {
             menuId=ucMenu.getId();
         }
+        String buttonId=null;
+        UcButton ucButton=ucButtonMapper.selectByButtonName("主页:开始");
+        if(ucButton==null){
+            UcButton button=new UcButton();
+            buttonId=IdUtils.id();
+            button.setId(buttonId);
+            button.setButtonClass("fa fa-start");
+            button.setButtonName("开始");
+            button.setButtonCode("INDEX_START");
+            button.setOrderNum(1);
+            ucButtonMapper.insert(button);
+        }
         int countUR=ucUserRoleMapper.checkExists(userId,roleId);
         if(countUR==0){
             UcUserRole userRole=new UcUserRole();
@@ -93,6 +134,13 @@ public class UserDaoTest {
             roleMenu.setMenuId(menuId);
             roleMenu.setRoleId(roleId);
             ucRoleMenuMapper.insert(roleMenu);
+        }
+        int countRB=ucRoleButtonMapper.checkExists(roleId,buttonId);
+        if(countRB==0){
+            UcRoleButton roleButton=new UcRoleButton();
+            roleButton.setRoleId(roleId);
+            roleButton.setButtonId(buttonId);
+            ucRoleButtonMapper.insert(roleButton);
         }
     }
 }

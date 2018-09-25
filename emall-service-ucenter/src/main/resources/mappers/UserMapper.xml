@@ -47,4 +47,12 @@
     select id, avatar, user_id, user_name, create_time, sex, birthday, email, idcard
     from t_user
   </select>
+  <select id="selectVoByUserId" resultType="com.shiny.emall.common.ucenter.vo.UserVo">
+    select id, avatar, user_id, user_name, sex, birthday, email, idcard
+    from t_user where user_id=#{userId}
+  </select>
+  <select id="selectByUserId" resultType="com.shiny.emall.common.ucenter.entity.User">
+    select id, avatar, user_id, user_name, create_time, sex, birthday, email, idcard
+    from t_user where user_id=#{userId}
+  </select>
 </mapper>

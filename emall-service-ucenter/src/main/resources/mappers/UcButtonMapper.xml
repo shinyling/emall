@@ -39,4 +39,14 @@
     select id, app_id, button_code, button_name, button_class, order_num
     from uc_button
   </select>
+  <select id="selectButtonsByUserId" resultMap="BaseResultMap">
+    select id, app_id, button_code, button_name, button_class, order_num FROM uc_button
+     WHERE id IN (SELECT button_id FROM uc_role_button WHERE role_id IN (
+       SELECT role_id FROM uc_user_role where user_id=#{userId}
+     ))
+  </select>
+  <select id="selectByButtonName" resultMap="BaseResultMap" >
+    select id, app_id, button_code, button_name, button_class, order_num FROM uc_button
+    WHERE button_name=#{buttonName}
+  </select>
 </mapper>

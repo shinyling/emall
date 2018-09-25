@@ -1,19 +1,17 @@
 package com.shiny.emall.ucenter.web.controller;
 
-import com.shiny.emall.common.ucenter.entity.UcUser;
+import com.shiny.emall.common.ucenter.vo.AddUserVo;
 import com.shiny.emall.common.vo.JsonResult;
 import com.shiny.emall.ucenter.web.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 /**
  * @author DELL shiny
@@ -27,24 +25,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "添加用户",notes = "需要身份验证")
+    @ApiOperation(value = "添加用户")
     @RequestMapping(value = "/user/add",method = RequestMethod.POST)
-    public JsonResult addUser(@Valid @RequestBody UcUser user, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            StringBuilder stringBuilder=new StringBuilder();
-            bindingResult.getAllErrors().stream().forEach(error -> {
-                FieldError fieldError= (FieldError) error;
-                log.info("字段:{},错误信息:{}",fieldError.getField(),fieldError.getDefaultMessage());
-                stringBuilder.append(fieldError.getField());
-                stringBuilder.append(":");
-                stringBuilder.append(fieldError.getDefaultMessage());
-                stringBuilder.append(".");
-            });
-            return JsonResult.failure(stringBuilder.toString());
-        }
-        return userService.addUser(user);
+    public JsonResult addUser(@Valid @RequestBody AddUserVo addUserVo){
+        return userService.addUser(addUserVo);
     }
 
+    @ApiOperation(value = "根据username查询用户信息")
     @RequestMapping(value = "/user/findByUsername/{username}",method = RequestMethod.GET)
     public JsonResult findByUsername(@PathVariable String username){
         if(StringUtils.isEmpty(username)){
@@ -56,5 +43,15 @@ public class UserController {
     @RequestMapping(value = "/user/list",method = RequestMethod.GET)
     public JsonResult list(){
         return userService.list();
+    }
+
+    @ApiOperation(value = "根据登陆用户查询用户信息")
+    @RequestMapping(value = "/user/info",method = RequestMethod.GET)
+    public JsonResult getUserInfo(Principal user){
+        String username=user.getName();
+        if(StringUtils.isNotEmpty(username)){
+            return userService.getUserInfo(username);
+        }
+        return JsonResult.failure("信息错误");
     }
 }

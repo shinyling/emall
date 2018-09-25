@@ -10,4 +10,6 @@ public interface UcRoleButtonMapper {
     int insert(UcRoleButton record);
 
     List<UcRoleButton> selectAll();
+
+    int checkExists(@Param("roleId") String roleId,@Param("buttonId") String buttonId);
 }
