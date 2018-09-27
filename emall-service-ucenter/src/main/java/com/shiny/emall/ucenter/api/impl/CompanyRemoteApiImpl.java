@@ -23,6 +23,10 @@ public class CompanyRemoteApiImpl implements CompanyRemoteApi{
 
     @Override
     public JsonResult companyAdd(@RequestBody Company company) {
+        int exists=companyMapper.selectByCompanyName(company);
+        if(exists>0){
+            return JsonResult.failure("公司已存在!");
+        }
         company.setId(IdUtils.id());
         company.setCreateTime(new Date());
         int count=companyMapper.insert(company);

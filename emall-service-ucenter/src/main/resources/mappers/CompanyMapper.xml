@@ -63,4 +63,7 @@
     email, web_site, fax, tel, bank, bank_account, legal_name, legal_tel
     from t_company
   </select>
+  <select id="selectByCompanyName" resultType="java.lang.Integer">
+    SELECT count(1) FROM t_company WHERE company_name=#{companyName}
+  </select>
 </mapper>

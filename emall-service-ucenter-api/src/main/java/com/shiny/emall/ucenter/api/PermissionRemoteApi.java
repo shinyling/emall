@@ -1,8 +1,9 @@
 package com.shiny.emall.ucenter.api;
 
+import com.shiny.emall.common.ucenter.entity.UcButton;
+import com.shiny.emall.common.ucenter.entity.UcMenu;
 import com.shiny.emall.common.vo.JsonResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author DELL shiny
@@ -10,6 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 public interface PermissionRemoteApi {
 
-    @RequestMapping(value = "findPermissionsByRoleId",method = RequestMethod.POST)
-    JsonResult findPermissionsByRoleId(String roleId);
+    @RequestMapping(value = "findPermissionsByRoleId",method = RequestMethod.GET)
+    JsonResult findPermissionsByRoleId(@RequestParam("roleId") String roleId);
+
+    @RequestMapping(value = "permission",method = RequestMethod.POST)
+    JsonResult permissionAdd(@RequestBody UcMenu ucMenu);
+
+    @RequestMapping(value = "roleMenu",method = RequestMethod.POST)
+    JsonResult roleMenu(@RequestParam("roleId") String roleId,@RequestParam("menuId") String menuId);
+
+    @RequestMapping(value = "permission",method = RequestMethod.GET)
+    JsonResult permissionList();
 }

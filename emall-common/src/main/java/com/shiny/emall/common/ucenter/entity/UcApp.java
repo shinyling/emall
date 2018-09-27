@@ -1,16 +1,21 @@
 package com.shiny.emall.common.ucenter.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 
 public class UcApp implements Serializable {
     private String id;
 
+    @NotBlank(message = "名称不能为空")
     private String appName;
 
     private String secretKey;
 
+    @NotBlank(message = "logo不能为空")
     private String appLogo;
 
+    @NotBlank(message = "主页不能为空")
     private String indexUrl;
 
     private String userNotifyUrl;

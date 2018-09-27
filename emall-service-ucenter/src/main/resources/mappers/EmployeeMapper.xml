@@ -45,4 +45,7 @@
     entry_time
     from t_employee
   </select>
+  <select id="selectByCompanyIdAndEmployeeCode" resultType="java.lang.Integer">
+    SELECT count(1) FROM  t_employee where company_id=#{companyId} and employee_code=#{employeeCode}
+  </select>
 </mapper>

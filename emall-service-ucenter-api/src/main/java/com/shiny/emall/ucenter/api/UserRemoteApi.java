@@ -3,10 +3,7 @@ package com.shiny.emall.ucenter.api;
 import com.shiny.emall.common.ucenter.entity.UcUser;
 import com.shiny.emall.common.ucenter.vo.AddUserVo;
 import com.shiny.emall.common.vo.JsonResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,15 +13,15 @@ import java.util.List;
  */
 public interface UserRemoteApi {
 
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/user",method = RequestMethod.POST)
     JsonResult addUser(@RequestBody AddUserVo addUserVo);
 
-    @RequestMapping(value = "/findByUsername",method = RequestMethod.POST)
+    @RequestMapping(value = "/findByUsername",method = RequestMethod.GET)
     JsonResult<UcUser> findByUsername(@RequestParam("username") String username);
 
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/user",method = RequestMethod.GET)
     JsonResult<List<UcUser>> list();
 
-    @RequestMapping(value = "/getUserInfo",method = RequestMethod.POST)
+    @RequestMapping(value = "/getUserInfo",method = RequestMethod.GET)
     JsonResult getUserInfo(@RequestParam("username") String username);
 }

@@ -44,3 +44,9 @@ server:
   port: 9526
 logging:
   config: classpath:log4j2.xml
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false

@@ -51,4 +51,7 @@
     address
     from t_dept
   </select>
+  <select id="selectByCompanyIdAndDeptCode" resultType="java.lang.Integer">
+    SELECT count(1) FROM t_dept WHERE company_id=#{companyId} and dept_code=#{deptCode}
+  </select>
 </mapper>

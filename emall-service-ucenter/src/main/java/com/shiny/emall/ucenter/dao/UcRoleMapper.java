@@ -16,4 +16,5 @@ public interface UcRoleMapper {
 
     UcRole selectByValue(String value);
 
+    List<UcRole> selectAll();
 }

@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     @ApiOperation(value = "添加用户")
-    @RequestMapping(value = "/user/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/user",method = RequestMethod.POST)
     public JsonResult addUser(@Valid @RequestBody AddUserVo addUserVo){
         return userService.addUser(addUserVo);
     }
@@ -40,7 +40,8 @@ public class UserController {
         return userService.findByUsername(username);
     }
 
-    @RequestMapping(value = "/user/list",method = RequestMethod.GET)
+    @ApiOperation("获取用户列表")
+    @RequestMapping(value = "/user",method = RequestMethod.GET)
     public JsonResult list(){
         return userService.list();
     }

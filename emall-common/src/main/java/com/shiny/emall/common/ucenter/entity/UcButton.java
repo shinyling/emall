@@ -1,5 +1,7 @@
 package com.shiny.emall.common.ucenter.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 
 public class UcButton implements Serializable {
@@ -7,10 +9,13 @@ public class UcButton implements Serializable {
 
     private String appId;
 
+    @NotBlank(message = "按钮编号不能为空")
     private String buttonCode;
 
+    @NotBlank(message = "按钮名称不能为空")
     private String buttonName;
 
+    @NotBlank(message = "按钮分类不能为空")
     private String buttonClass;
 
     private Integer orderNum;

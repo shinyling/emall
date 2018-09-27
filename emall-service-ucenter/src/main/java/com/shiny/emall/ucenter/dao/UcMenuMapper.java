@@ -3,6 +3,7 @@ package com.shiny.emall.ucenter.dao;
 import com.shiny.emall.common.ucenter.entity.UcMenu;
 import com.shiny.emall.common.ucenter.vo.MenuVo;
 
+import java.awt.*;
 import java.util.List;
 
 public interface UcMenuMapper {
@@ -19,4 +20,6 @@ public interface UcMenuMapper {
     UcMenu selectMenuByPath(String path);
 
     List<MenuVo> selectMenusByUserId(String userId);
+
+    List<UcMenu> selectAll();
 }

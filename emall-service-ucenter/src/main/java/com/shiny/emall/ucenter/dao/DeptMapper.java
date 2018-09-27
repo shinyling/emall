@@ -13,4 +13,6 @@ public interface DeptMapper {
     List<Dept> selectAll();
 
     int updateByPrimaryKey(Dept record);
+
+    int selectByCompanyIdAndDeptCode(Dept dept);
 }

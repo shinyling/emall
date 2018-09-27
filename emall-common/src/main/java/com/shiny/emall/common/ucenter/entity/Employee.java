@@ -1,21 +1,27 @@
 package com.shiny.emall.common.ucenter.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Employee implements Serializable {
     private String id;
 
+    @NotBlank(message = "未注册不能加入")
     private String userId;
 
     private String companyId;
 
+    @NotBlank(message = "部门不能为空")
     private String deptId;
 
     private Date createTime;
 
+    @NotBlank(message = "员工编号不能为空")
     private String employeeCode;
 
+    @NotBlank(message = "员工职位不能为空")
     private String employeePosition;
 
     private Date entryTime;

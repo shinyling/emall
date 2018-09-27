@@ -13,4 +13,6 @@ public interface UcDataMapper {
     List<UcData> selectAll();
 
     int updateByPrimaryKey(UcData record);
+
+    UcData selectByDataName(String dataName);
 }

@@ -54,4 +54,8 @@
   <select id="selectByValue" resultType="com.shiny.emall.common.ucenter.entity.UcRole">
     SELECT * from uc_role where `value`=#{value}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id,app_id,company_id, `name`, `value`, create_time, create_by, update_time, update_by, `status`
+    from uc_role
+  </select>
 </mapper>

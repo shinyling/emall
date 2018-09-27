@@ -1,5 +1,7 @@
 package com.shiny.emall.common.ucenter.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,12 +10,15 @@ public class Dept implements Serializable {
 
     private String parentId;
 
+    @NotBlank(message = "公司不能为空")
     private String companyId;
 
+    @NotBlank(message = "部门名称不能为空")
     private String deptName;
 
     private Date createTime;
 
+    @NotBlank(message = "部门编码不能为空")
     private String deptCode;
 
     private String tel;
