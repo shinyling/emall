@@ -29,8 +29,8 @@
   </div>
 </template>
 <script>
-import User from '../../api/user'
-import {sucessMessage, errorMessage} from '../../providers/http-service'
+import User from '../api/user'
+import {sucessMessage, errorMessage} from '../providers/http-service'
 export default {
   data () {
     return {
@@ -51,9 +51,14 @@ export default {
         if (valid) {
           this.loading = true
           User.login(this.form.username, this.form.password).then((response) => {
-            var result=response.data;
-            this.$store.dispatch("storeToken",result.access_token)
-            this.$router.push('/home')
+            console.log(response)
+            this.$store.dispatch("storeToken",response.access_token)
+            User.getUserInfo().then((res) => {
+              this.$store.dispatch("setUser", res)
+              this.$router.push('/home')
+            }).catch((error) => {
+              errorMessage("用户信息拉取失败!")
+            })
           }).catch((err) => {
             errorMessage(err)
             this.loading = false
@@ -69,7 +74,7 @@ export default {
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
-    background: url('../../../static/images/bg1.jpg') bottom center no-repeat #efeff4;
+    background: url('../../static/images/bg1.jpg') bottom center no-repeat #efeff4;
   }
   .login {
     width: 100%;

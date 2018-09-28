@@ -8,9 +8,15 @@ export default {
       'Authorization': 'Basic YWNtZTphY21lc2VjcmV0',
       'Content-Type': 'application/x-www-form-urlencoded'
     }
-    return request.POST_HEADER('/auth/oauth/token', {username, password, grant_type, scope}, headers)
+    var data = {
+      username: username,
+      password: password,
+      grant_type: grant_type,
+      scope: scope
+    }
+    return request.POST_HEADER('/auth/oauth/token', data, headers)
   },
   getUserInfo: () => {
-    return request.GET('/ucenter/user/info')
+    return request.GET('/api/user/info')
   }
 }

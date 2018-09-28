@@ -2,18 +2,26 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import {getToken, setToken, removeToken} from '../utils/token'
 
-import { constantRouterMap } from '@/router'
+import { constantRouterMap, dynamicRouterMap } from '@/router'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: {id: null, name: null},
+    user: {},
+    menus: [],
+    resources: [],
     author: 'shiny',
     access_token: null,
     routers: constantRouterMap
   },
   getters: {
+    resources (state) {
+      return state.resources
+    },
+    menus (state) {
+      return state.menus
+    },
     user (state) {
       return state.user
     },
@@ -22,44 +30,55 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setUserId (state, userId) {
-      localStorage.setItem('userId', userId)
-      state.user.id = userId
+    setUser(state, user){
+      state.user = user
     },
-    setUsername (state, username) {
-      localStorage.setItem('username', username)
-      state.user.name = username
+    setMenus(state, user){
+      state.menus = user.menus
+    },
+    setResources(state, user){
+      state.resources = user.resources
     },
     setAccessToken (state, token) {
       state.access_token = token
     },
     logout (state) {
       removeToken()
-      localStorage.removeItem('userId')
-      localStorage.removeItem('username')
       state.access_token = null
       state.user = null
     },
     setRouters (state, routers) {
-      state.routers = constantRouterMap
+      state.routers = constantRouterMap.concat(routers)
     }
   },
   actions: {
+    setUser({commit},user){
+      commit('setUser', user)
+      commit('setMenus', user)
+      commit('setResources', user)
+    },
     storeToken({commit},token){
       setToken(token)
       commit('setAccessToken', token)
     },
     refresh ({commit}) {
-      commit('setUserId', localStorage.getItem('userId'))
-      commit('setUsername', localStorage.getItem('username'))
       commit('setAccessToken', getToken())
     },
     clear ({commit}) {
       commit('logout')
     },
     generateRoutes ({ commit }, data) {
+      let dr = new Array();
+      for(let i = 0; i< dynamicRouterMap.length; i++){
+        let name=dynamicRouterMap[i].name;
+        for(let j = 0; j < data.length; j++){
+          if(data[j].name==name){
+            dr.push(dynamicRouterMap[i]);
+          }
+        }
+      }
       return new Promise(resolve => {
-        commit('setRouters', null)
+        commit('setRouters', dr)
         resolve()
       })
     }

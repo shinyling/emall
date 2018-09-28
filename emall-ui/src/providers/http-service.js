@@ -4,24 +4,22 @@ import qs from 'qs'
 import {getToken} from '../utils/token'
 import {Notice, Message} from 'iview'
 
-const service = axios.create({
-  timeout: 15000
-})
-
+axios.defaults.timeout = 15000
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
-service.interceptors.request.use(config => {
-  config.data = JSON.stringify(config.data)
+axios.interceptors.request.use(config => {
+  if(config.method!='get'){
+    config.data=qs.stringify(config.data);
+  }
   if (getToken()) {
     config.headers['Authorization'] = 'Bearer ' + getToken()
   }
   return config
 }, error => {
-  console.log(error)
   return Promise.reject(error)
 })
 
-service.interceptors.response.use(
+axios.interceptors.response.use(
   response => {
     var result = response.data
     if (result.status === 200) {
@@ -31,9 +29,8 @@ service.interceptors.response.use(
         path: '/',
         query: {redirect: router.currentRoute.fullPath}
       })
-    } else {
-      errorMessage(result.msg)
     }
+    return Promise.resolve(result)
   }, error => {
     switch (error.response.status) {
       case 401: {
@@ -52,7 +49,7 @@ export const POST_HEADER = (url, params, headers) => {
   return axios({
     method: 'post',
     url: `${url}`,
-    data: qs.stringify(params),
+    data: params,
     headers : headers
   })
 }
@@ -89,4 +86,4 @@ export function errorMessage (msg) {
   })
 }
 
-export default service
+export default axios
